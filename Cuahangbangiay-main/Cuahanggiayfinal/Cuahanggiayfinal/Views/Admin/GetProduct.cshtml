@@ -1,0 +1,91 @@
+﻿@using Cuahanggiayfinal.Models
+@using PagedList.Mvc;
+@model PagedList.PagedList<Cuahanggiayfinal.Models.PRODUCT>
+@{
+    ViewBag.Title = "GetProduct";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title"> Thông tin Giày</h4>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead class=" text-primary">
+                            <th>
+                                Id
+                            </th>
+                            <th>
+                                Name
+                            </th>
+                            <th>
+                                Size
+                            </th>
+                            <th>
+                                Ngày Cập Nhật
+                            </th>
+                            <th>
+                                Ảnh
+                            </th>
+                            <th>
+                                Gía
+                            </th>
+                            <th>
+                                Số lượng Tồn
+                            </th>
+                            <th>
+                            </th>
+                            <th>
+                            </th>
+                            </thead>
+                            <tbody>
+                                @for (int i = 0; i < Model.Count(); i++)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Model[i].productId
+                                        </td>
+                                        <td>
+                                            @Model[i].productName
+                                        </td>
+                                        <td>
+                                            @Model[i].size.sizegiay
+                                        </td>
+                                        <td>
+                                            @Model[i].ngaycapnhat
+                                        </td>
+                                        <td>
+                                            <img src="@Url.Content("~/images/"+ Model[i].img)" style="width:40%" />
+                                        </td>
+                                        <td>
+                                            @Model[i].price
+                                        </td>
+                                        <td>
+                                            @Model[i].soluongton
+                                        </td>
+                                        <td>
+                                            
+                                            <a><img src="~/image/flags/pencil.png" style="width:20px" /></a>
+                                        </td>
+                                        <td>
+                                            <a><img src="~/image/flags/trash.png" style="width:20px" /></a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div style="margin-left: 550px" >Bạn Đang ở Trang: @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)/@Model.PageCount</div>
+<div style="text-align: center; margin-left: 600px">
+    @Html.PagedListPager(Model, page => Url.Action("GetProduct", new { page = page }) )
+</div>
+
